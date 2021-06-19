@@ -13,3 +13,9 @@ internal class Cache: NSManagedObject {
 	@NSManaged internal var timestamp: Date
 	@NSManaged internal var feed: NSOrderedSet
 }
+
+extension Cache {
+	internal var localFeed: [LocalFeedImage] {
+		return feed.compactMap { ($0 as? CacheImage)?.local }
+	}
+}

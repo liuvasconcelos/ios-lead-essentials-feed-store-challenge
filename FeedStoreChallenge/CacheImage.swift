@@ -16,3 +16,9 @@ internal class CacheImage: NSManagedObject {
 	@NSManaged internal var url: URL
 	@NSManaged internal var cache: Cache
 }
+
+extension CacheImage {
+	internal var local: LocalFeedImage {
+		return LocalFeedImage(id: id, description: imageDescription, location: location, url: url)
+	}
+}
