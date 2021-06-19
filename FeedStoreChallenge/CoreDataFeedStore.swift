@@ -32,13 +32,7 @@ public final class CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				guard let cacheEntityName = Cache.entity().name else {
-					completion(.empty)
-					return
-				}
-				let request = NSFetchRequest<Cache>(entityName: cacheEntityName)
-				request.returnsObjectsAsFaults = false
-				if let cache = try context.fetch(request).first {
+				if let cache = try Cache.find(in: context) {
 					completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
 				} else {
 					completion(.empty)
@@ -53,11 +47,7 @@ public final class CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				guard let cacheEntityName = Cache.entity().name else {
-					return
-				}
-				let request = NSFetchRequest<Cache>(entityName: cacheEntityName)
-				if let cache = try context.fetch(request).first {
+				if let cache = try Cache.find(in: context) {
 					context.delete(cache)
 				}
 				let cache = Cache(context: context)
