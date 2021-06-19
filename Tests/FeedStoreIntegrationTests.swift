@@ -6,7 +6,6 @@ import XCTest
 import FeedStoreChallenge
 
 class FeedStoreIntegrationTests: XCTestCase {
-
 	override func setUpWithError() throws {
 		try super.setUpWithError()
 
@@ -20,9 +19,9 @@ class FeedStoreIntegrationTests: XCTestCase {
 	}
 
 	func test_retrieve_deliversEmptyOnEmptyCache() throws {
-//		let sut = try makeSUT()
-//
-//		expect(sut, toRetrieve: .empty)
+		let sut = try makeSUT()
+
+		expect(sut, toRetrieve: .empty)
 	}
 
 	func test_retrieve_deliversFeedInsertedOnAnotherInstance() throws {
