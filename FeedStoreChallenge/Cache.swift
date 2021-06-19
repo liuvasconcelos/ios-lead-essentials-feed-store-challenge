@@ -25,4 +25,9 @@ extension Cache {
 		request.returnsObjectsAsFaults = false
 		return try context.fetch(request).first
 	}
+
+	internal static func newUniqueInstance(in context: NSManagedObjectContext) throws -> Cache {
+		try find(in: context).map(context.delete)
+		return Cache(context: context)
+	}
 }

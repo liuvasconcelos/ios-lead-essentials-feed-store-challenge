@@ -47,10 +47,7 @@ public final class CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				if let cache = try Cache.find(in: context) {
-					context.delete(cache)
-				}
-				let cache = Cache(context: context)
+				let cache = try Cache.newUniqueInstance(in: context)
 				cache.timestamp = timestamp
 				cache.feed = NSOrderedSet(array: feed.map { local in
 					let image = CacheImage(context: context)
