@@ -16,7 +16,7 @@ internal class Cache: NSManagedObject {
 
 extension Cache {
 	internal var localFeed: [LocalFeedImage] {
-		return feed.compactMap { ($0 as? CacheImage)?.local }
+		return feed.compactMap { ($0 as? CachedImage)?.local }
 	}
 
 	internal static func find(in context: NSManagedObjectContext) throws -> Cache? {

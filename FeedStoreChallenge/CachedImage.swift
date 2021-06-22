@@ -1,5 +1,5 @@
 //
-//  CacheImage.swift
+//  CachedImage.swift
 //  FeedStoreChallenge
 //
 //  Created by Livia Vasconcelos on 19/06/21.
@@ -8,8 +8,8 @@
 
 import CoreData
 
-@objc(CacheImage)
-internal class CacheImage: NSManagedObject {
+@objc(CachedImage)
+internal class CachedImage: NSManagedObject {
 	@NSManaged internal var id: UUID
 	@NSManaged internal var imageDescription: String?
 	@NSManaged internal var location: String?
@@ -17,14 +17,14 @@ internal class CacheImage: NSManagedObject {
 	@NSManaged internal var cache: Cache
 }
 
-extension CacheImage {
+extension CachedImage {
 	internal var local: LocalFeedImage {
 		return LocalFeedImage(id: id, description: imageDescription, location: location, url: url)
 	}
 
 	internal static func images(from localFeed: [LocalFeedImage], in context: NSManagedObjectContext) -> NSOrderedSet {
 		return NSOrderedSet(array: localFeed.map { local in
-			let managed = CacheImage(context: context)
+			let managed = CachedImage(context: context)
 			managed.id = local.id
 			managed.imageDescription = local.description
 			managed.location = local.location
