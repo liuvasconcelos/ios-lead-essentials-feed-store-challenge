@@ -9,7 +9,7 @@
 import CoreData
 
 @objc(CachedImage)
-internal class CachedImage: NSManagedObject {
+final class CachedImage: NSManagedObject {
 	@NSManaged internal var id: UUID
 	@NSManaged internal var imageDescription: String?
 	@NSManaged internal var location: String?
